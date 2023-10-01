@@ -14,7 +14,7 @@
     "parser": "@typescript-eslint/parser",
     "sourceType": "module"
   },
-  "plugins": ["@typescript-eslint", "vue"],
+  "plugins": ["no-relative-import-paths", "@typescript-eslint", "vue"],
   "rules": {
     "no-duplicate-imports": "error",
     "arrow-body-style": [
@@ -33,6 +33,10 @@
     "no-unneeded-ternary": "error",
     "prefer-const": "error",
     "yoda": "error",
-    "eol-last": "error"
+    "eol-last": "error",
+    "no-relative-import-paths/no-relative-import-paths": [
+      "warn",
+      { "allowSameFolder": true }
+    ]
   }
 }

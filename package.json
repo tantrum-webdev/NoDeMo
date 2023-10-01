@@ -19,6 +19,7 @@
     "@vitejs/plugin-vue": "^4.2.3",
     "eslint": "^8.50.0",
     "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-no-relative-import-paths": "^1.5.2",
     "eslint-plugin-vue": "^9.17.0",
     "husky": "^8.0.3",
     "lint-staged": "^14.0.1",
