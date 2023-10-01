@@ -16,6 +16,23 @@
   },
   "plugins": ["@typescript-eslint", "vue"],
   "rules": {
-    "no-duplicate-imports": "error"
+    "no-duplicate-imports": "error",
+    "arrow-body-style": [
+      "error",
+      "as-needed",
+      { "requireReturnForObjectLiteral": true }
+    ],
+    "curly": "error",
+    "max-lines": "warn",
+    "no-else-return": "error",
+    "no-magic-numbers": [
+      "error",
+      { "ignoreArrayIndexes": true, "ignoreDefaultValues": true }
+    ],
+    "no-nested-ternary": "error",
+    "no-unneeded-ternary": "error",
+    "prefer-const": "error",
+    "yoda": "error",
+    "eol-last": "error"
   }
 }
