@@ -30,7 +30,7 @@
   },
   "lint-staged": {
     "src/**/*.{js,vue,ts}": "eslint --cache --fix",
-    "src/**/*.{js,css,md,vue}": "prettier --write"
+    "src/**/*.{js,css,md,vue,ts}": "prettier --write"
   },
   "prettier": {
     "printWidth": 80,
