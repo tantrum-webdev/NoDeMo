@@ -1,8 +1,13 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useUserStore } from '@/store';
+
+const store = useUserStore();
+</script>
 
 <template>
   <header>
-    <h1>NoDeMo</h1>
+    <h1>NoDeMo - Hello {{ store.user.name }}</h1>
+
     <nav>
       <ul>
         <li><router-link to="/">Home</router-link></li>
