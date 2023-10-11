@@ -6,7 +6,8 @@ const store = useUserStore();
 
 <template>
   <header>
-    <h1>NoDeMo - Hello {{ store.user.name }}</h1>
+    <h1 v-if="store.user !== null">NoDeMo - Hello {{ store.user.name }}</h1>
+    <h1 v-else>NoDeMo - Hello stranger</h1>
 
     <nav>
       <ul>
@@ -17,6 +18,8 @@ const store = useUserStore();
         <li><router-link to="/public">public</router-link></li>
       </ul>
     </nav>
+    <button v-if="!store.user" @click="store.login">Login</button>
+    <button v-else @click="store.logout">Log out</button>
   </header>
 </template>
 

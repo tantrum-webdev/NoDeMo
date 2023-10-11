@@ -1,5 +1,10 @@
 import { defineStore } from 'pinia';
 
+interface User {
+  name: string;
+  id: string;
+}
+
 export const useUserStore = defineStore('user', {
   /**
    * Could be worth to some form of 'state' key with the user.
@@ -9,22 +14,29 @@ export const useUserStore = defineStore('user', {
    */
   state: () => {
     return {
-      user: { name: 'Cyril', id: 1235 },
+      user: null as User | null,
     };
   },
 
   actions: {
+    // login() {
+    //   // To be replaced by some actual endpoint stored in a config somewhere
+    //   fetch('/')
+    //     .then((res) => res.json())
+    //     .then((user) => {
+    //       this.user = user;
+    //     })
+    //     .catch((err) => {
+    //       // Need to to something with the error other than logging it
+    //       console.warn(err);
+    //     });
+    // },
     login() {
-      // To be replaced by some actual endpoint
-      fetch('/')
-        .then((res) => res.json())
-        .then((user) => {
-          this.user = user;
-        })
-        .catch((err) => {
-          // Need to to something with the error other than logging it
-          console.warn(err);
-        });
+      this.user = { id: '1234', name: 'Cyril' };
+    },
+
+    logout() {
+      this.user = null;
     },
   },
 });
