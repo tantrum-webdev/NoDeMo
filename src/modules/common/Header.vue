@@ -22,7 +22,7 @@ const store = useUserStore();
         <li><router-link to="/public">public</router-link></li>
       </ul>
     </nav>
-    <button v-if="!store.user" @click="store.login">Login</button>
+    <button v-if="isNil(store.user)" @click="store.login">Login</button>
     <button v-else @click="store.logout">Log out</button>
   </header>
 </template>
