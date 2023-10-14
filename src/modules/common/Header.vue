@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useUserStore } from '@/store';
+import { isNil } from '@/helpers/functions';
 
 const store = useUserStore();
 </script>
@@ -8,8 +9,8 @@ const store = useUserStore();
   <header>
     <h1>
       NoDeMo - Hello
-      <span v-if="store.user !== null">{{ store.user.name }}</span>
-      <span v-else>Stranger</span>
+      <span v-if="isNil(store.user)">Stranger</span>
+      <span v-else>{{ store.user.name }}</span>
     </h1>
 
     <nav>
