@@ -1,15 +1,8 @@
 <script setup lang="ts">
 import { useUserStore } from '@/store';
 import { isNil } from '@/helpers/functions';
-import { useRouter } from 'vue-router';
 
 const store = useUserStore();
-const router = useRouter();
-
-function handleLogin() {
-  store.login();
-  router.push({ path: '/my' });
-}
 </script>
 
 <template>
@@ -29,10 +22,8 @@ function handleLogin() {
         <li><router-link to="/public">public</router-link></li>
       </ul>
     </nav>
-    <button v-if="!store.user" @click="handleLogin">Login</button>
-    <button v-else @click="store.logout">
-      <router-link to="/logout">Log out</router-link>
-    </button>
+    <button v-if="!store.user" @click="store.login">Login</button>
+    <button v-else @click="store.logout">Log out</button>
   </header>
 </template>
 

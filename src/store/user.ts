@@ -18,13 +18,15 @@ export const useUserStore = defineStore('user', {
   actions: {
     // Will be replaced by proper action that posts the login form
     login() {
-      restFetch('/login', { method: 'POST' }).then(
-        (user) => (this.user = user),
-      );
+      restFetch('/login', { method: 'POST' }).then((user) => {
+        this.user = user;
+        this.router.push({ path: '/my' });
+      });
     },
 
     logout() {
       this.user = null;
+      this.router.push({ path: '/' });
     },
   },
 });
