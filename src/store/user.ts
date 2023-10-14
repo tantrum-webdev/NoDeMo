@@ -1,9 +1,5 @@
+import { Maybe, User } from '@/types';
 import { defineStore } from 'pinia';
-
-interface User {
-  name: string;
-  id: string;
-}
 
 export const useUserStore = defineStore('user', {
   /**
@@ -14,23 +10,12 @@ export const useUserStore = defineStore('user', {
    */
   state: () => {
     return {
-      user: null as User | null,
+      user: null as Maybe<User>,
     };
   },
 
   actions: {
-    // login() {
-    //   // To be replaced by some actual endpoint stored in a config somewhere
-    //   fetch('/')
-    //     .then((res) => res.json())
-    //     .then((user) => {
-    //       this.user = user;
-    //     })
-    //     .catch((err) => {
-    //       // Need to to something with the error other than logging it
-    //       console.warn(err);
-    //     });
-    // },
+    // Will be replaced by proper action that posts the login form
     login() {
       this.user = { id: '1234', name: 'Cyril' };
     },
