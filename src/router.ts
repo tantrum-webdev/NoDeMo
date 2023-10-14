@@ -10,10 +10,15 @@ export default createRouter({
   routes: [
     { path: '/', component: Home },
     { path: '/login', component: Login },
+    {
+      path: '/logout',
+      redirect: { path: '/' },
+    },
     { path: '/register', component: Register },
     {
       path: '/my',
       component: Dashboard,
+      meta: { requiresAuth: true },
       beforeEnter: () => {
         const store = useUserStore();
 
@@ -22,6 +27,7 @@ export default createRouter({
         }
       },
     },
+
     { path: '/public', component: Public }, // this will need a dynamic param for the username
     { path: '/:pathMatch(.*)*', component: Error },
   ],
