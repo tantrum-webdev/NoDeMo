@@ -17,11 +17,6 @@
   "plugins": ["no-relative-import-paths", "@typescript-eslint", "vue"],
   "rules": {
     "no-duplicate-imports": "error",
-    "arrow-body-style": [
-      "error",
-      "as-needed",
-      { "requireReturnForObjectLiteral": true }
-    ],
     "curly": "error",
     "max-lines": "warn",
     "no-else-return": "error",

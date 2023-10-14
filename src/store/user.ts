@@ -1,3 +1,4 @@
+import { fetcher } from '@/helpers/functions';
 import { Maybe, User } from '@/types';
 import { defineStore } from 'pinia';
 
@@ -17,11 +18,19 @@ export const useUserStore = defineStore('user', {
   actions: {
     // Will be replaced by proper action that posts the login form
     login() {
-      this.user = { id: '1234', name: 'Cyril' };
+      fetcher('/login', { method: 'POST' })
+        .then((user) => {
+          this.user = user;
+          this.router.push({ path: '/my' });
+        })
+        .catch((err) => {
+          console.warn('SOMETHING HAPPENED', err);
+        });
     },
 
     logout() {
       this.user = null;
+      this.router.push({ path: '/' });
     },
   },
 });
