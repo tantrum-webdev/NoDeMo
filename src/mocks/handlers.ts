@@ -6,7 +6,6 @@ const http = {
 
 export const handlers = [
   rest.post('/login', (_, res, ctx) => {
-    console.log('GOT REQ');
-    return res(ctx.status(http.ok));
+    return res(ctx.status(http.ok), ctx.json({ name: 'John Doe', id: '1' }));
   }),
 ];
