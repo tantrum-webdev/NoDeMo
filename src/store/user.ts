@@ -17,6 +17,7 @@ export const useUserStore = defineStore('user', {
   actions: {
     // Will be replaced by proper action that posts the login form
     login() {
+      fetch('/login', { method: 'POST' });
       this.user = { id: '1234', name: 'Cyril' };
     },
 
