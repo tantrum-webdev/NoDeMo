@@ -5,7 +5,7 @@ export function isNil(value: unknown): value is null | undefined {
 export function restFetch(endpoint: string, options?: RequestInit) {
   return fetch(endpoint, options).then((res) => {
     if (!res.ok) {
-      throw new Error(`${res.status}`);
+      throw new Error(`${res.status} - ${res.statusText}`);
     }
 
     return res.json();
