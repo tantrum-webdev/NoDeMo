@@ -4,3 +4,8 @@ export interface User {
 }
 
 export type Maybe<T> = T | null;
+
+export interface UserForm {
+  name: string;
+  password: string;
+}
