@@ -17,7 +17,7 @@ function handleSubmit() {
   <section>
     <h2>Login</h2>
     <form id="form" @submit.prevent="handleSubmit">
-      <label for="#username">Username</label>
+      <label for="username">Username</label>
       <input
         type="text"
         id="username"
@@ -25,7 +25,7 @@ function handleSubmit() {
         placeholder="JohnDoe"
         v-model.trim="userName"
       />
-      <label for="#password">Password</label>
+      <label for="password">Password</label>
       <input type="password" id="password" required v-model="password" />
       <button type="submit">Login</button>
     </form>
