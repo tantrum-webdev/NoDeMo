@@ -20,9 +20,3 @@ describe('Helpers functions', () => {
     });
   });
 });
-
-describe('Failing sample test', () => {
-  it('fails', () => {
-    expect(true).toBe(false);
-  });
-});
