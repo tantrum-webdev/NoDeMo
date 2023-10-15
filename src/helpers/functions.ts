@@ -2,10 +2,13 @@ export function isNil(value: unknown): value is null | undefined {
   return value === null || value === undefined;
 }
 
-export function fetcher(endpoint: string, options?: RequestInit) {
+export function fetcher<T>(
+  endpoint: string,
+  options?: RequestInit,
+): Promise<T> {
   return fetch(endpoint, options).then((res) => {
     if (!res.ok) {
-      throw new Error(`${res.status} - ${res.statusText}`);
+      return Promise.reject(res);
     }
 
     return res.json();

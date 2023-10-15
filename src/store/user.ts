@@ -16,9 +16,8 @@ export const useUserStore = defineStore('user', {
   },
 
   actions: {
-    // Will be replaced by proper action that posts the login form
     login() {
-      fetcher('/login', { method: 'POST' })
+      fetcher<User>('/login', { method: 'POST' })
         .then((user) => {
           this.user = user;
           this.router.push({ path: '/my' });
