@@ -1,5 +1,5 @@
 import { fetcher } from '@/helpers/functions';
-import { Maybe, User } from '@/types';
+import { Maybe, User, UserForm } from '@/types';
 import { defineStore } from 'pinia';
 
 export const useUserStore = defineStore('user', {
@@ -16,8 +16,15 @@ export const useUserStore = defineStore('user', {
   },
 
   actions: {
-    login() {
-      fetcher<User>('/login', { method: 'POST' })
+    login({ name, password }: UserForm) {
+      fetcher<User>('/login', {
+        method: 'POST',
+        headers: { 'Content-type': 'application/json' },
+        body: JSON.stringify({
+          name,
+          password,
+        }),
+      })
         .then((user) => {
           this.user = user;
           this.router.push({ path: '/my' });

@@ -16,14 +16,15 @@ const store = useUserStore();
     <nav>
       <ul>
         <li><router-link to="/">Home</router-link></li>
-        <li><router-link to="/login">Login</router-link></li>
         <li><router-link to="/register">Register</router-link></li>
-        <li><router-link to="/my">dashboard</router-link></li>
-        <li><router-link to="/public">public</router-link></li>
+        <li><router-link to="/my">Dashboard</router-link></li>
+        <li><router-link to="/public">Public</router-link></li>
+        <li>
+          <router-link v-if="isNil(store.user)" to="/login">Login</router-link>
+          <button v-else @click="store.logout">Log out</button>
+        </li>
       </ul>
     </nav>
-    <button v-if="isNil(store.user)" @click="store.login">Login</button>
-    <button v-else @click="store.logout">Log out</button>
   </header>
 </template>
 

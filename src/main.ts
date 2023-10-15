@@ -8,7 +8,8 @@ import { Router } from 'vue-router';
 // Start MSW worker only while in dev
 if (import.meta.env.DEV) {
   import('@/mocks/browser').then(({ worker }) => {
-    worker.start();
+    // start the worker and doesn't warn on unhandled request
+    worker.start({ onUnhandledRequest: 'bypass' });
   });
 }
 
