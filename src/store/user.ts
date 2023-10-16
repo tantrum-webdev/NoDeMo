@@ -43,6 +43,7 @@ export const useUserStore = defineStore('user', {
         body: JSON.stringify({ name, password }),
       })
         .then((user) => {
+          console.log(user);
           this.user = user;
           this.router.push({ path: '/my' });
         })
