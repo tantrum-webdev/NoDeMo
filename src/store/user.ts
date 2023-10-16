@@ -36,14 +36,17 @@ export const useUserStore = defineStore('user', {
       this.router.push({ path: '/' });
     },
 
-    register({ name, password }: UserForm) {
+    /**
+     * Form validation should potentially be handled here with an error state
+     * that can be consumed by components for login / register failures.
+     */
+    register(form: UserForm) {
       fetcher<User>('/register', {
         method: 'POST',
         headers: { 'Content-type': 'application/json' },
-        body: JSON.stringify({ name, password }),
+        body: JSON.stringify(form),
       })
         .then((user) => {
-          console.log(user);
           this.user = user;
           this.router.push({ path: '/my' });
         })
