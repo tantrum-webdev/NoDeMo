@@ -4,6 +4,7 @@ import { users } from './data';
 import { isNil } from '@/helpers/functions';
 import { User } from '@/types';
 import { UserFormRequest } from './types';
+import { getNextId } from './functions';
 
 export const handlers = [
   rest.post<UserFormRequest, PathParams<string>, User>(
@@ -32,12 +33,10 @@ export const handlers = [
     '/register',
     (req, res, ctx) => {
       return req.json().then(({ name, password }) => {
-        const maxId = users.reduce((max, user) => {
-          const id = parseInt(user.id, 10);
-          return id > max ? id : max;
-        }, -Infinity);
+        // get the highest id in users to get the base for the next user
+        const nextId = getNextId(users);
 
-        const user = { id: String(maxId + 1), name, password, userName: name };
+        const user = { id: nextId, name, password, userName: name };
         users.push(user);
 
         return res(
