@@ -4,7 +4,6 @@ import { users } from './data';
 import { isNil } from '@/helpers/functions';
 import { User } from '@/types';
 import { UserFormRequest } from './types';
-import { getNextId } from './functions';
 
 export const handlers = [
   rest.post<UserFormRequest, PathParams<string>, User>(
@@ -33,9 +32,12 @@ export const handlers = [
     '/register',
     (req, res, ctx) => {
       return req.json().then(({ name, password }) => {
-        const nextId = getNextId(users);
-
-        const user = { id: nextId, name, password, userName: name };
+        const user = {
+          id: crypto.randomUUID(),
+          name,
+          password,
+          userName: name,
+        };
         users.push(user);
 
         return res(
