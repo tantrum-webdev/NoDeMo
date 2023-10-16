@@ -33,7 +33,6 @@ export const handlers = [
     '/register',
     (req, res, ctx) => {
       return req.json().then(({ name, password }) => {
-        // get the highest id in users to get the base for the next user
         const nextId = getNextId(users);
 
         const user = { id: nextId, name, password, userName: name };
