@@ -16,14 +16,11 @@ export const useUserStore = defineStore('user', {
   },
 
   actions: {
-    login({ name, password }: UserForm) {
+    login(form: UserForm) {
       fetcher<User>('/login', {
         method: 'POST',
         headers: { 'Content-type': 'application/json' },
-        body: JSON.stringify({
-          name,
-          password,
-        }),
+        body: JSON.stringify(form),
       })
         .then((user) => {
           this.user = user;
@@ -37,6 +34,25 @@ export const useUserStore = defineStore('user', {
     logout() {
       this.user = null;
       this.router.push({ path: '/' });
+    },
+
+    /**
+     * Form validation should potentially be handled here with an error state
+     * that can be consumed by components for login / register failures.
+     */
+    register(form: UserForm) {
+      fetcher<User>('/register', {
+        method: 'POST',
+        headers: { 'Content-type': 'application/json' },
+        body: JSON.stringify(form),
+      })
+        .then((user) => {
+          this.user = user;
+          this.router.push({ path: '/my' });
+        })
+        .catch((err) => {
+          console.warn('SOMETHING HAPPENED', err);
+        });
     },
   },
 });

@@ -22,7 +22,11 @@
     "no-else-return": "error",
     "no-magic-numbers": [
       "error",
-      { "ignoreArrayIndexes": true, "ignoreDefaultValues": true }
+      {
+        "ignoreArrayIndexes": true,
+        "ignoreDefaultValues": true,
+        "ignore": [0, 1]
+      }
     ],
     "no-nested-ternary": "error",
     "no-unneeded-ternary": "error",

@@ -4,11 +4,13 @@ import { useUserStore } from '@/store';
 import { ref } from 'vue';
 
 const store = useUserStore();
-const userName = ref('');
-const password = ref('');
+const form = ref({
+  name: '',
+  password: '',
+});
 
 function handleSubmit() {
-  store.login({ name: userName.value, password: password.value });
+  store.login(form.value);
 }
 </script>
 
@@ -16,17 +18,17 @@ function handleSubmit() {
   <AppHeader />
   <section>
     <h2>Login</h2>
-    <form id="form" @submit.prevent="handleSubmit">
+    <form @submit.prevent="handleSubmit">
       <label for="username">Username</label>
       <input
         type="text"
         id="username"
         required
         placeholder="JohnDoe"
-        v-model.trim="userName"
+        v-model.trim="form.name"
       />
       <label for="password">Password</label>
-      <input type="password" id="password" required v-model="password" />
+      <input type="password" id="password" required v-model="form.password" />
       <button type="submit">Login</button>
     </form>
     <p>
