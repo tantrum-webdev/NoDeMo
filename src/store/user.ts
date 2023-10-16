@@ -16,14 +16,11 @@ export const useUserStore = defineStore('user', {
   },
 
   actions: {
-    login({ name, password }: UserForm) {
+    login(form: UserForm) {
       fetcher<User>('/login', {
         method: 'POST',
         headers: { 'Content-type': 'application/json' },
-        body: JSON.stringify({
-          name,
-          password,
-        }),
+        body: JSON.stringify(form),
       })
         .then((user) => {
           this.user = user;
@@ -37,6 +34,21 @@ export const useUserStore = defineStore('user', {
     logout() {
       this.user = null;
       this.router.push({ path: '/' });
+    },
+
+    register({ name, password }: UserForm) {
+      fetcher<User>('/register', {
+        method: 'POST',
+        headers: { 'Content-type': 'application/json' },
+        body: JSON.stringify({ name, password }),
+      })
+        .then((user) => {
+          this.user = user;
+          this.router.push({ path: '/my' });
+        })
+        .catch((err) => {
+          console.warn('SOMETHING HAPPENED', err);
+        });
     },
   },
 });
