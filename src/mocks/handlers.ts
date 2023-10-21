@@ -1,8 +1,8 @@
 import { HTTP } from '@/helpers/constants';
 import { PathParams, rest } from 'msw';
-import { users } from './data';
+import { bookmarks, users } from './data';
 import { isNil } from '@/helpers/functions';
-import { User } from '@/types';
+import { Bookmark, User } from '@/types';
 import { UserFormRequest } from './types';
 
 export const handlers = [
@@ -47,4 +47,12 @@ export const handlers = [
       });
     },
   ),
+
+  rest.get<Array<Bookmark>>('/bookmarks/:userId', (req, res, ctx) => {
+    const { userId } = req.params;
+
+    const userBookmarks = bookmarks[userId as string];
+
+    return res(ctx.status(HTTP.OK), ctx.json({ bookmarks: userBookmarks }));
+  }),
 ];

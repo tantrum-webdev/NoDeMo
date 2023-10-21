@@ -1,3 +1,4 @@
 import { useUserStore } from './user';
+import { useBookmarkStore } from './bookmarks';
 
-export { useUserStore };
+export { useUserStore, useBookmarkStore };
