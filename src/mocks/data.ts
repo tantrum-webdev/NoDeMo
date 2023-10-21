@@ -1,6 +1,6 @@
-import { StoredUsed } from './types';
+import { StoredUser } from './types';
 
-export const users: Array<StoredUsed> = [
+export const users: Array<StoredUser> = [
   {
     name: 'allandrow',
     password: '1234',

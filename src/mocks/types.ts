@@ -3,7 +3,7 @@ export interface UserFormRequest {
   password: string;
 }
 
-export interface StoredUsed {
+export interface StoredUser {
   name: string;
   password: string;
   userName: string;
