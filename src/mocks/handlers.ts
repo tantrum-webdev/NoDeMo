@@ -55,4 +55,21 @@ export const handlers = [
 
     return res(ctx.status(HTTP.OK), ctx.json({ bookmarks: userBookmarks }));
   }),
+
+  rest.post<Bookmark>('/bookmarks/:userId', (req, res, ctx) => {
+    const { userId } = req.params;
+
+    return req.json().then(({ url }: { url: string }) => {
+      const bookmark: Bookmark = {
+        cover: 'https://placehold.co/50',
+        date: Date.now(),
+        id: crypto.randomUUID(),
+        title: 'Placeholder title',
+        url,
+      };
+
+      bookmarks[userId as string].push(bookmark);
+      return res(ctx.status(HTTP.CREATED), ctx.json(bookmark));
+    });
+  }),
 ];

@@ -1,4 +1,4 @@
-import { fetcher } from '@/helpers/functions';
+import { fetcher, isNil } from '@/helpers/functions';
 import { Bookmark, Maybe } from '@/types';
 import { defineStore } from 'pinia';
 
@@ -17,6 +17,19 @@ export const useBookmarkStore = defineStore('bookmarks', {
         if (bookmarks.length > 0) {
           this.bookmarks = bookmarks;
         }
+      });
+    },
+
+    addBookmark(id: string, bookmarkUrl: string) {
+      fetcher<Bookmark>(`/bookmarks/${id}`, {
+        method: 'POST',
+        body: JSON.stringify({ url: bookmarkUrl }),
+      }).then((bookmark) => {
+        if (isNil(this.bookmarks)) {
+          this.bookmarks = [bookmark];
+        }
+
+        this.bookmarks = [...this.bookmarks, bookmark];
       });
     },
   },
