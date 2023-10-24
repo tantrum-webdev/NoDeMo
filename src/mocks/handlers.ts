@@ -1,8 +1,8 @@
 import { HTTP } from '@/helpers/constants';
 import { PathParams, rest } from 'msw';
-import { users } from './data';
+import { bookmarks, users } from './data';
 import { isNil } from '@/helpers/functions';
-import { User } from '@/types';
+import { Bookmark, User } from '@/types';
 import { UserFormRequest } from './types';
 
 export const handlers = [
@@ -47,4 +47,29 @@ export const handlers = [
       });
     },
   ),
+
+  rest.get<Array<Bookmark>>('/bookmarks/:userId', (req, res, ctx) => {
+    const { userId } = req.params;
+
+    const userBookmarks = bookmarks[userId as string];
+
+    return res(ctx.status(HTTP.OK), ctx.json({ bookmarks: userBookmarks }));
+  }),
+
+  rest.post<Bookmark>('/bookmarks/:userId', (req, res, ctx) => {
+    const { userId } = req.params;
+
+    return req.json().then(({ url }: { url: string }) => {
+      const bookmark: Bookmark = {
+        cover: 'https://placehold.co/50',
+        date: Date.now(),
+        id: crypto.randomUUID(),
+        title: 'Placeholder title',
+        url,
+      };
+
+      bookmarks[userId as string].push(bookmark);
+      return res(ctx.status(HTTP.CREATED), ctx.json(bookmark));
+    });
+  }),
 ];
