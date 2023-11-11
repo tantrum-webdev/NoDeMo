@@ -4,6 +4,7 @@ import { defineStore } from 'pinia';
 
 type FetchedBookmarks = Record<'bookmarks', Array<Bookmark>>;
 type MaybeBookmarks = Maybe<Array<Bookmark>>;
+
 export const useBookmarkStore = defineStore('bookmarks', {
   state: () => {
     return {

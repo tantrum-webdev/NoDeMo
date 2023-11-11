@@ -1,4 +1,4 @@
-import { Home, Dashboard, Login, Register, Public, Error } from '@/views';
+import { Home, Dashboard, Login, Register, Error, Public } from '@/views';
 import { createRouter, createWebHistory } from 'vue-router';
 import { useBookmarkStore, useUserStore } from './store';
 import { isNil } from './helpers/functions';
@@ -26,11 +26,6 @@ export default createRouter({
       },
     },
     {
-      path: '/notfound',
-      component: Error,
-    },
-
-    {
       path: '/:username',
       component: Public,
       beforeEnter: (to) => {
@@ -38,6 +33,10 @@ export default createRouter({
 
         store.getSharedBookmarks(to.params.username as string);
       },
+    },
+    {
+      path: '/notfound',
+      component: Error,
     },
   ],
 });

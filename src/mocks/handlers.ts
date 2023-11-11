@@ -50,7 +50,6 @@ export const handlers = [
 
   rest.get<Array<Bookmark>>('/bookmarks/:userId', (req, res, ctx) => {
     const { userId } = req.params;
-
     const userBookmarks = bookmarks[userId as string];
 
     return res(ctx.status(HTTP.OK), ctx.json({ bookmarks: userBookmarks }));
@@ -82,8 +81,9 @@ export const handlers = [
       return res(ctx.status(HTTP.NOT_FOUND));
     }
 
-    const userBookmarks = bookmarks[user.id];
-
-    return res(ctx.status(HTTP.OK), ctx.json({ bookmarks: userBookmarks }));
+    return res(
+      ctx.status(HTTP.OK),
+      ctx.json({ bookmarks: bookmarks[user.id] }),
+    );
   }),
 ];
