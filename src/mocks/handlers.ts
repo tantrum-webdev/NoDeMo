@@ -76,7 +76,6 @@ export const handlers = [
 
   rest.get<Array<Bookmark>>('/shared/:username', (req, res, ctx) => {
     const { username } = req.params;
-
     const user = users.find((user) => user.name === username);
 
     if (isNil(user)) {
