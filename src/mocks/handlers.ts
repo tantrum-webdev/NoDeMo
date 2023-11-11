@@ -1,7 +1,7 @@
 import { HTTP } from '@/helpers/constants';
 import { PathParams, rest } from 'msw';
 import { bookmarks, users } from './data';
-import { isNil } from '@/helpers/functions';
+import { isNil, isNotNil } from '@/helpers/functions';
 import { Bookmark, User } from '@/types';
 import { UserFormRequest } from './types';
 
@@ -71,5 +71,19 @@ export const handlers = [
       bookmarks[userId as string].push(bookmark);
       return res(ctx.status(HTTP.CREATED), ctx.json(bookmark));
     });
+  }),
+
+  rest.get<Array<Bookmark>>('/shared/:username', (req, res, ctx) => {
+    const { username } = req.params;
+
+    const user = users.find((user) => user.name === username);
+    console.log(user);
+    if (isNotNil(user)) {
+      const userBookmarks = bookmarks[user.id];
+
+      return res(ctx.status(HTTP.OK), ctx.json({ bookmarks: userBookmarks }));
+    }
+
+    return res(ctx.status(HTTP.NOT_FOUND));
   }),
 ];

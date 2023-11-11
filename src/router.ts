@@ -1,4 +1,4 @@
-import { Home, Dashboard, Login, Register, Error, Public } from '@/views';
+import { Home, Dashboard, Login, Register, Public } from '@/views';
 import { createRouter, createWebHistory } from 'vue-router';
 import { useUserStore } from './store';
 import { isNil } from './helpers/functions';
@@ -28,7 +28,6 @@ export default createRouter({
       },
     },
 
-    { path: '/public', component: Public }, // this will need a dynamic param for the username
-    { path: '/:pathMatch(.*)*', component: Error },
+    { path: '/:username', component: Public }, // this will need a dynamic param for the username
   ],
 });

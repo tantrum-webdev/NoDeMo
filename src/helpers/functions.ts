@@ -10,11 +10,15 @@ export function fetcher<T>(
   endpoint: string,
   options?: RequestInit,
 ): Promise<T> {
-  return fetch(endpoint, options).then((res) => {
-    if (!res.ok) {
-      return Promise.reject(res);
-    }
+  return fetch(endpoint, options)
+    .then((res) => {
+      if (!res.ok) {
+        return Promise.reject(res);
+      }
 
-    return res.json();
-  });
+      return res.json();
+    })
+    .catch((err) => {
+      console.log('ERR', err);
+    });
 }
