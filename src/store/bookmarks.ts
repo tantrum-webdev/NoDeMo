@@ -41,5 +41,9 @@ export const useBookmarkStore = defineStore('bookmarks', {
         this.bookmarks = [...this.bookmarks, bookmark];
       });
     },
+
+    clearSharedBookmarks() {
+      this.sharedBookmarks = null;
+    },
   },
 });

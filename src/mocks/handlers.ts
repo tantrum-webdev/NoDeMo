@@ -77,7 +77,6 @@ export const handlers = [
     const { username } = req.params;
 
     const user = users.find((user) => user.name === username);
-    console.log(user);
     if (isNotNil(user)) {
       const userBookmarks = bookmarks[user.id];
 
