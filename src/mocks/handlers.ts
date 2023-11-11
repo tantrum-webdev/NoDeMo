@@ -50,9 +50,11 @@ export const handlers = [
 
   rest.get<Array<Bookmark>>('/bookmarks/:userId', (req, res, ctx) => {
     const { userId } = req.params;
-    const userBookmarks = bookmarks[userId as string];
 
-    return res(ctx.status(HTTP.OK), ctx.json({ bookmarks: userBookmarks }));
+    return res(
+      ctx.status(HTTP.OK),
+      ctx.json({ bookmarks: bookmarks[userId as string] }),
+    );
   }),
 
   rest.post<Bookmark>('/bookmarks/:userId', (req, res, ctx) => {
