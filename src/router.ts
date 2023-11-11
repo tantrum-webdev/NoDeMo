@@ -1,9 +1,7 @@
 import { Home, Dashboard, Login, Register, Public, Error } from '@/views';
 import { createRouter, createWebHistory } from 'vue-router';
-import { useUserStore } from './store';
+import { useBookmarkStore, useUserStore } from './store';
 import { isNil } from './helpers/functions';
-
-export const routes = [];
 
 export default createRouter({
   history: createWebHistory(),
@@ -32,6 +30,14 @@ export default createRouter({
       component: Error,
     },
 
-    { path: '/:username', component: Public }, // this will need a dynamic param for the username
+    {
+      path: '/:username',
+      component: Public,
+      beforeEnter: (to) => {
+        const store = useBookmarkStore();
+
+        store.getSharedBookmarks(to.params.username as string);
+      },
+    },
   ],
 });
