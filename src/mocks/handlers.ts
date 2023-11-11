@@ -1,7 +1,7 @@
 import { HTTP } from '@/helpers/constants';
 import { PathParams, rest } from 'msw';
 import { bookmarks, users } from './data';
-import { isNil, isNotNil } from '@/helpers/functions';
+import { isNil } from '@/helpers/functions';
 import { Bookmark, User } from '@/types';
 import { UserFormRequest } from './types';
 
@@ -77,12 +77,13 @@ export const handlers = [
     const { username } = req.params;
 
     const user = users.find((user) => user.name === username);
-    if (isNotNil(user)) {
-      const userBookmarks = bookmarks[user.id];
 
-      return res(ctx.status(HTTP.OK), ctx.json({ bookmarks: userBookmarks }));
+    if (isNil(user)) {
+      return res(ctx.status(HTTP.NOT_FOUND));
     }
 
-    return res(ctx.status(HTTP.NOT_FOUND));
+    const userBookmarks = bookmarks[user.id];
+
+    return res(ctx.status(HTTP.OK), ctx.json({ bookmarks: userBookmarks }));
   }),
 ];

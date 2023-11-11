@@ -22,11 +22,15 @@ export const useBookmarkStore = defineStore('bookmarks', {
     },
 
     getSharedBookmarks(username: string) {
-      fetcher<FetchedBookmarks>(`/shared/${username}`).then(({ bookmarks }) => {
-        if (bookmarks.length > 0) {
-          this.sharedBookmarks = bookmarks;
-        }
-      });
+      fetcher<FetchedBookmarks>(`/shared/${username}`)
+        .then(({ bookmarks }) => {
+          if (bookmarks.length > 0) {
+            this.sharedBookmarks = bookmarks;
+          }
+        })
+        .catch(() => {
+          this.router.push('/notfound');
+        });
     },
 
     addBookmark(id: string, bookmarkUrl: string) {
