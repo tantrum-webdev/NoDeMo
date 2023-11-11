@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { isNil } from '@/helpers/functions';
+import { isNil, isNotNil } from '@/helpers/functions';
 import AppHeader from '@/modules/common/Header.vue';
 import { useUserStore, useBookmarkStore } from '@/store';
 import { onMounted, ref } from 'vue';
@@ -10,12 +10,12 @@ const bookmarkStore = useBookmarkStore();
 const bookmarkUrl = ref('');
 
 onMounted(() => {
-  if (!isNil(userStore.user)) {
+  if (isNotNil(userStore.user)) {
     bookmarkStore.getBookmarks(userStore.user.id);
   }
 });
 function handleSubmit() {
-  if (!isNil(userStore.user)) {
+  if (isNotNil(userStore.user)) {
     bookmarkStore.addBookmark(userStore.user.id, bookmarkUrl.value);
     bookmarkUrl.value = '';
   }
