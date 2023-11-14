@@ -3,11 +3,13 @@ import { Bookmark, Maybe } from '@/types';
 import { defineStore } from 'pinia';
 
 type FetchedBookmarks = Record<'bookmarks', Array<Bookmark>>;
+type MaybeBookmarks = Maybe<Array<Bookmark>>;
 
 export const useBookmarkStore = defineStore('bookmarks', {
   state: () => {
     return {
-      bookmarks: null as Maybe<Array<Bookmark>>,
+      bookmarks: null as MaybeBookmarks,
+      sharedBookmarks: null as MaybeBookmarks,
     };
   },
 
@@ -18,6 +20,18 @@ export const useBookmarkStore = defineStore('bookmarks', {
           this.bookmarks = bookmarks;
         }
       });
+    },
+
+    getSharedBookmarks(username: string) {
+      fetcher<FetchedBookmarks>(`/shared/${username}`)
+        .then(({ bookmarks }) => {
+          if (bookmarks.length > 0) {
+            this.sharedBookmarks = bookmarks;
+          }
+        })
+        .catch(() => {
+          this.router.push('/notfound');
+        });
     },
 
     addBookmark(id: string, bookmarkUrl: string) {
@@ -31,6 +45,10 @@ export const useBookmarkStore = defineStore('bookmarks', {
 
         this.bookmarks = [...this.bookmarks, bookmark];
       });
+    },
+
+    clearSharedBookmarks() {
+      this.sharedBookmarks = null;
     },
   },
 });

@@ -1,5 +1,5 @@
 /* eslint-disable no-magic-numbers */
-import { isNil } from './functions';
+import { isNil, isNotNil } from './functions';
 
 describe('Helpers functions', () => {
   describe('isNil', () => {
@@ -16,6 +16,24 @@ describe('Helpers functions', () => {
 
       falsyValues.forEach((value) => {
         expect(isNil(value)).toBe(false);
+      });
+    });
+  });
+
+  describe('isNotNil', () => {
+    it('returns false if value is null', () => {
+      expect(isNotNil(null)).toBe(false);
+    });
+
+    it('returns false if value is undefined', () => {
+      expect(isNotNil(undefined)).toBe(false);
+    });
+
+    it('returns true if value is neither null nor undefined', () => {
+      const falsyValues = ['', 0, false, {}, []];
+
+      falsyValues.forEach((value) => {
+        expect(isNotNil(value)).toBe(true);
       });
     });
   });

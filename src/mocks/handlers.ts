@@ -51,9 +51,10 @@ export const handlers = [
   rest.get<Array<Bookmark>>('/bookmarks/:userId', (req, res, ctx) => {
     const { userId } = req.params;
 
-    const userBookmarks = bookmarks[userId as string];
-
-    return res(ctx.status(HTTP.OK), ctx.json({ bookmarks: userBookmarks }));
+    return res(
+      ctx.status(HTTP.OK),
+      ctx.json({ bookmarks: bookmarks[userId as string] }),
+    );
   }),
 
   rest.post<Bookmark>('/bookmarks/:userId', (req, res, ctx) => {
@@ -71,5 +72,19 @@ export const handlers = [
       bookmarks[userId as string].push(bookmark);
       return res(ctx.status(HTTP.CREATED), ctx.json(bookmark));
     });
+  }),
+
+  rest.get<Array<Bookmark>>('/shared/:username', (req, res, ctx) => {
+    const { username } = req.params;
+    const user = users.find((user) => user.name === username);
+
+    if (isNil(user)) {
+      return res(ctx.status(HTTP.NOT_FOUND));
+    }
+
+    return res(
+      ctx.status(HTTP.OK),
+      ctx.json({ bookmarks: bookmarks[user.id] }),
+    );
   }),
 ];
